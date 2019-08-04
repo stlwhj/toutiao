@@ -47,12 +47,13 @@
         <el-dropdown class="my-dropdown">
           <span class="el-dropdown-link">
             <img src="../../assets/images/avatar.jpg" alt />
-            用户名称
+            你瞅啥
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>个人设置</el-dropdown-item>
-            <el-dropdown-item>退出登录</el-dropdown-item>
+            <el-dropdown-item>瞅你咋地</el-dropdown-item>
+            <el-dropdown-item>再瞅一个试试</el-dropdown-item>
+            <el-dropdown-item>试试就试试</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
