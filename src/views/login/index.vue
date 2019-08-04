@@ -26,7 +26,7 @@
 </template>
 
 <script>
-// import { log } from 'util';
+import store from '@/store'
 export default {
   data () {
     const checkMobile = (rule, value, callback) => {
@@ -39,8 +39,8 @@ export default {
 
     return {
       loginform: {
-        mobile: '',
-        code: ''
+        mobile: '13911111111',
+        code: '246810'
       },
       loginRules: {
         mobile: [
@@ -64,10 +64,12 @@ export default {
               this.loginform
             )
             .then(res => {
-              console.log(res.data)
+              // console.log(res.data)
+              store.setUser(res.data.data)
               this.$router.push('/')
             })
             .catch(() => {
+              // console.log(err)
               this.$message.error('手机号或验证码错误')
             })
         }
