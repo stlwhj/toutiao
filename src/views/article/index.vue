@@ -38,6 +38,15 @@
         </el-form-item>
       </el-form>
     </el-card>
+    <el-card>
+      <div slot="header">根据筛选条件共查询到 0 条结果 :</div>
+      <el-table :data="articles">
+        <el-table-column label="封面" prop="img"></el-table-column>
+      </el-table>
+      <div style="text-align:center">
+        <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+      </div>
+    </el-card>
   </div>
 </template>
 
@@ -50,11 +59,15 @@ export default {
         channel_id: null
       },
       channelOptions: [{ value: 1, label: 'js' }],
-      dateArr: []
+      dateArr: [],
+      articles: []
     }
   }
 }
 </script>
 
 <style scoped lang="less">
+.el-card {
+  margin-bottom: 20px;
+}
 </style>
