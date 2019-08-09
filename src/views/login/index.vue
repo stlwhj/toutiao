@@ -39,8 +39,8 @@ export default {
 
     return {
       loginform: {
-        mobile: '13911111111',
-        code: '246810'
+        mobile: '',
+        code: ''
       },
       loginRules: {
         mobile: [
@@ -56,22 +56,31 @@ export default {
   },
   methods: {
     login () {
-      this.$refs.loginform.validate(valid => {
+      this.$refs.loginform.validate(async valid => {
         if (valid) {
-          this.$http
-            .post(
-              'http://ttapi.research.itcast.cn/mp/v1_0/authorizations',
-              this.loginform
-            )
-            .then(res => {
-              // console.log(res.data)
-              store.setUser(res.data.data)
-              this.$router.push('/')
-            })
-            .catch(() => {
-              // console.log(err)
-              this.$message.error('手机号或验证码错误')
-            })
+          // this.$http
+          //   .post(
+          //     'http://ttapi.research.itcast.cn/mp/v1_0/authorizations',
+          //     this.loginform
+          //   )
+          //   .then(res => {
+          //     // console.log(res.data)
+          //     store.setUser(res.data.data)
+          //     this.$router.push('/')
+          //   })
+          //   .catch(() => {
+          //     // console.log(err)
+          //     this.$message.error('手机号或验证码错误')
+          //   })
+          try {
+            const {
+              data: { data }
+            } = await this.$http.post('authorizations', this.loginform)
+            store.setUser(data)
+            this.$router.push('/')
+          } catch (e) {
+            this.$message.error('手机号或验证码错误')
+          }
         }
       })
     }
