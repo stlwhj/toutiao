@@ -13,8 +13,13 @@
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button v-if="!scope.row.comment_status" size="small" type="success">打开评论</el-button>
-            <el-button v-else size="small" type="danger">关闭评论</el-button>
+            <el-button
+              @click="toggleStatus(scope.row)"
+              v-if="!scope.row.comment_status"
+              size="small"
+              type="success"
+            >打开评论</el-button>
+            <el-button @click="toggleStatus(scope.row)" v-else size="small" type="danger">关闭评论</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -48,6 +53,17 @@ export default {
     this.getComments()
   },
   methods: {
+    async toggleStatus (row) {
+      const {
+        data: { data }
+      } = await this.$http.put(`comments/status?article_id=${row.id}`, {
+        allow_comment: !row.comment_status
+      })
+      this.$message.success(
+        data.allow_comment ? '打开评论成功' : '关闭评论成功'
+      )
+      row.comment_status = data.allow_comment
+    },
     changePager (newPage) {
       this.reqParams.page = newPage
       this.getComments()
