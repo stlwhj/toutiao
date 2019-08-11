@@ -121,7 +121,7 @@ export default {
     async getImages () {
       const {
         data: { data }
-      } = await this.$http.get('/user/images', { params: this.reqParams })
+      } = await this.$http.get('user/images', { params: this.reqParams })
       this.images = data.results
       this.total = data.total_count
     }
