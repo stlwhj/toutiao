@@ -1,7 +1,9 @@
 const KEY = 'toutiao-user'
 export default {
   setUser (user) {
-    window.sessionStorage.setItem(KEY, JSON.stringify(user))
+    const localUser = this.getUser()
+    const nowUser = { ...localUser, ...user }
+    window.sessionStorage.setItem(KEY, JSON.stringify(nowUser))
   },
   getUser () {
     return JSON.parse(window.sessionStorage.getItem(KEY) || '{}')
